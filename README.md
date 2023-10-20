@@ -4,7 +4,7 @@ This repository contains the source code for a Tic-Tac-Toe AI that utilizes a he
 $$\left\( E(S)=3S(X_2) + S(X_1)-3S(O_2)-S(O_1) \right\)$$
 
 Where:
-- S is an element of the search state.
+- S is an element of the search space.
 - $(X_2)$ is the number of lines with 2 X's and a blank.
 - $(X_1)$ is the number of lines with 1 X and 2 blanks.
 - $(O_2)$ is the number of lines with 2 O's and a blank.
