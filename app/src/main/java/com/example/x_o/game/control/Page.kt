@@ -1,4 +1,4 @@
-package com.example.x_o.game.Control
+package com.example.x_o.game.control
 
 sealed class Page(public val route:String) {
     object GamePage: Page("game_page")

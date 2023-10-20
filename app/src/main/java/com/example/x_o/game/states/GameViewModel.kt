@@ -4,13 +4,24 @@ import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 
 import androidx.compose.runtime.mutableStateOf
+import com.example.x_o.game.logic.AI
+import com.example.x_o.game.logic.GameRules
 import kotlin.random.Random
 
 
 class TicTacToeViewModel(public val isSinglePlayer:Boolean=true) : ViewModel() {
+
+
+    private var currentPlayer:Char
+    private  var ai:AI
+    init {
+        //TODO:CHange this latter to be more dynamic
+        currentPlayer='X'
+        ai=AI('0')
+    }
     private val _board = mutableStateOf<List<Char>>(List(9) { ' ' })
     val board: MutableState<List<Char>> = _board
-    private var currentPlayer = 'X'
+
     var winner=""
     var gameInProgress = true
     fun onCellClick(index: Int) {
@@ -27,29 +38,17 @@ class TicTacToeViewModel(public val isSinglePlayer:Boolean=true) : ViewModel() {
     }
 
     fun aiMove(){
-        var randomIndex = 0
-        while(_board.value!![randomIndex] !=' '){
-            randomIndex = Random.nextInt(0,8)
-            Log.i("Here",randomIndex.toString())
-        }
+
+        val aiIndexChoice=ai.findBestMove(_board.value)
         _board.value = _board.value!!.toMutableList().apply {
-            set(randomIndex ,currentPlayer);
+            set(aiIndexChoice ,currentPlayer);
         }
         currentPlayer = if (currentPlayer == 'X') 'O' else 'X'
         checkGameStatus()
     }
     private fun checkGameStatus() {
-        val winningLines = listOf(
-            listOf(0, 1, 2),
-            listOf(3, 4, 5),
-            listOf(6, 7, 8),
-            listOf(0, 3, 6),
-            listOf(1, 4, 7),
-            listOf(2, 5, 8),
-            listOf(0, 4, 8),
-            listOf(2, 4, 6)
-        )
-        for (line in winningLines) {
+
+        for (line in GameRules.winningLines) {
             val (a, b, c) = line
             if (_board.value!![a] != ' ' && _board.value!![a] == _board.value!![b] && _board.value!![b] == _board.value!![c]) {
                 gameInProgress = false

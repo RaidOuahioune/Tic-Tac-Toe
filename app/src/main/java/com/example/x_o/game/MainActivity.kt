@@ -7,12 +7,10 @@ import android.os.Vibrator
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.x_o.game.Control.Navigation
+import com.example.x_o.game.control.Navigation
 import com.example.x_o.game.states.SplashViewModel
 import com.example.x_o.ui.theme.X_oTheme
 class MainActivity : ComponentActivity() {
-
-
     private val splashModel :SplashViewModel by viewModels()
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {

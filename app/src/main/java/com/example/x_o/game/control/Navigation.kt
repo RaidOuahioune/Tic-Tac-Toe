@@ -1,4 +1,4 @@
-package com.example.x_o.game.Control
+package com.example.x_o.game.control
 
 import GamePage
 import IntroPage
@@ -23,8 +23,8 @@ fun Navigation(vibrator: Vibrator) {
             route = Page.GamePage.route.plus("?ai={ai}"),
             arguments = listOf(
                 navArgument("ai") {
-                    defaultValue = false
                     type = NavType.BoolType
+                    defaultValue=false
                 }
             )
         ) { navBackStackEntry ->
