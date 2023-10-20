@@ -1,8 +1,6 @@
 # Tic-Tac-Toe AI
 
-This repository contains the source code for a Tic-Tac-Toe AI that utilizes a heuristic evaluation function to make intelligent moves in the game. The heuristic used for the game is described by the following formula:
-
-**Assuming that the Agent Plays with X**:
+This repository contains the source code for a Tic-Tac-Toe AI that utilizes a heuristic evaluation function to make intelligent moves in the game. The heuristic used for the game is described by the following formula(**Assuming that the Agent Plays with X**):
 $$\left\( E(S)=3S(X_2) + S(X_1)-3S(O_2)-S(O_1) \right\)$$
 
 Where:
