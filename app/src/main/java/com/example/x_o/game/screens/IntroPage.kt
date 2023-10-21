@@ -27,8 +27,6 @@ import com.example.x_o.game.logic.GameOption
 class IntroPage(private val navController: NavController) {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-
-
     operator fun invoke() {
         var selectedOption by remember { mutableStateOf(GameOption.AI) }
         Scaffold() { innerPadding ->
@@ -57,7 +55,7 @@ class IntroPage(private val navController: NavController) {
                         selectedOption = GameOption.MULTIPLAYER
                     }()
                     GameModeButton(
-                        text = "Remote", selected = selectedOption == GameOption.REMOTE
+                        text = "Remote multiplayer", selected = selectedOption == GameOption.REMOTE
                     ) {
                         selectedOption = GameOption.REMOTE
                     }()
