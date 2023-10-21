@@ -1,4 +1,5 @@
 package com.example.x_o.game.composables
+
 import TicTacToeViewModel
 import android.os.Vibrator
 import androidx.compose.foundation.background
@@ -19,13 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-class GameDialog(vibrator: Vibrator) {
-    @Preview(showBackground = true)
+
+class GameDialog(vibrator: Vibrator, private val viewModel: TicTacToeViewModel) {
+
     @Composable
-    public fun get(viewModel:TicTacToeViewModel=TicTacToeViewModel()){
+    operator fun invoke() {
         Dialog(
             onDismissRequest = {
                 viewModel.gameInProgress = true
@@ -36,18 +37,19 @@ class GameDialog(vibrator: Vibrator) {
                     .height(120.dp)
                     .fillMaxSize()
                     .padding(16.dp)
-                   .border(
+                    .border(
                         1.dp,
                         Color.Red,
                         shape = RoundedCornerShape(8.dp),
-                    ).background(Color.White,  shape = RoundedCornerShape(8.dp),),
+                    )
+                    .background(Color.White, shape = RoundedCornerShape(8.dp)),
                 verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = (if(viewModel.winner=="") "Draw" else (if(viewModel.isSinglePlayer==true) if(viewModel.winner=="2") "Ai Won the Game"  else "Player ${viewModel.winner}  Won the Game" else  "Player ${viewModel.winner}  Won the Game" )),
+                    text = (if (viewModel.winner == "") "Draw" else (if (viewModel.isSinglePlayer == true) if (viewModel.winner == "2") "Ai Won the Game" else "Player ${viewModel.winner}  Won the Game" else "Player ${viewModel.winner}  Won the Game")),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = if(viewModel.winner== "")Color.Blue else if(viewModel.winner=="1")Color.Red else Color.Green, // Change text color to blue
+                    color = if (viewModel.winner == "") Color.Blue else if (viewModel.winner == "1") Color.Red else Color.Green, // Change text color to blue
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -56,7 +58,10 @@ class GameDialog(vibrator: Vibrator) {
                         viewModel.gameInProgress = true
                         viewModel.resetGame()
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFfa5552), contentColor = Color.White)
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFfa5552),
+                        contentColor = Color.White
+                    )
                 ) {
                     Text("New Game", color = Color.White)
                 }

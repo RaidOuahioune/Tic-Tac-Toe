@@ -22,17 +22,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 
-class GameCell(public val vibrator: Vibrator) {
+class GameCell(
+    private val vibrator: Vibrator,
+    private val value: Char,
+    val onCellClick: () -> Unit
+) {
     @RequiresApi(Build.VERSION_CODES.S)
     @Composable
-    fun get(value: Char, onCellClick: () -> Unit) {
+    operator fun invoke() {
         Card(
             modifier = Modifier
                 .padding(horizontal = 10.dp)
                 .clickable {
-                    if(value!=' ' ){
-                        vibrator.vibrate( VibrationEffect.createOneShot (90,VibrationEffect.EFFECT_TICK))
-                    }else{
+                    if (value != ' ') {
+                        vibrator.vibrate(
+                            VibrationEffect.createOneShot(
+                                90,
+                                VibrationEffect.EFFECT_TICK
+                            )
+                        )
+                    } else {
+
                         onCellClick()
                     }
                 },
