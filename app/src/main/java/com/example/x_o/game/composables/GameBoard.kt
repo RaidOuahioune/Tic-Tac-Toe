@@ -14,15 +14,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-class GameBoard(public val vibrator: Vibrator) {
-    @RequiresApi(Build.VERSION_CODES.R)
+class GameBoard(
+    private val vibrator: Vibrator,
+    private val board: List<Char>,
+    private val onCellClick: (Int) -> Unit
+) {
+    @RequiresApi(Build.VERSION_CODES.S)
     @Composable
-    fun get(board: List<Char>, onCellClick: (Int) -> Unit) {
+    operator fun invoke() {
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth()
         ) {
-            itemsIndexed(board.chunked(3)) { rowIndex ,row->
+            itemsIndexed(board.chunked(3)) { rowIndex, row ->
 
                 Row(
                     horizontalArrangement = Arrangement.Center,
@@ -31,7 +35,7 @@ class GameBoard(public val vibrator: Vibrator) {
                         .padding(vertical = 10.dp)
                 ) {
                     row.forEachIndexed { index, cell ->
-                        GameCell(vibrator).get(cell) { onCellClick(3 * rowIndex + index) }
+                        GameCell(vibrator, cell) { onCellClick(3 * rowIndex + index) }()
                     }
                 }
             }

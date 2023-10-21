@@ -1,12 +1,16 @@
 package com.example.x_o.game.logic
 
+import android.util.Log
 
-class AI(private val aiPlayer:Char) {
 
-    private  var opponent:Char
+class AI(private val aiPlayer: Char) {
+
+    private var opponent: Char
+
     init {
-        opponent=opponent()
+        opponent = opponent()
     }
+
     private fun evaluate(board: List<Char>): Int {
         if (hasLetterWon(board, aiPlayer)) {
             return Int.MAX_VALUE
@@ -14,26 +18,27 @@ class AI(private val aiPlayer:Char) {
         if (hasLetterWon(board, opponent)) {
             return -Int.MAX_VALUE
         }
-
         val playerTwoLinesCount = countLinesWithTwoLetters(board, aiPlayer)
         val playerOneLineCount = countLinesWithOneLetter(board, aiPlayer)
         val oppTwoLinesCount = countLinesWithTwoLetters(board, opponent)
         val oppOneLineCount = countLinesWithOneLetter(board, opponent)
-
-        return 3 * playerTwoLinesCount + playerOneLineCount - (3 * oppTwoLinesCount + oppOneLineCount)
+        return (3 * playerTwoLinesCount + playerOneLineCount) - (3 * oppTwoLinesCount + oppOneLineCount)
     }
 
-    fun findBestMove(currentState:List<Char>): Int {
+    fun findBestMove(currentState: List<Char>): Int {
         val emptyCells = currentState.indices.filter { currentState[it] == ' ' }
         val evaluationMap = mutableMapOf<Int, Int>()
         for (emptyCell in emptyCells) {
             val nextState = currentState.toMutableList()
             nextState[emptyCell] = aiPlayer
             val evaluation = evaluate(nextState)
+
             evaluationMap[emptyCell] = evaluation
         }
-        return  evaluationMap.maxBy { it.value }.key
+
+        return evaluationMap.maxBy { it.value }.key
     }
+
     private fun countLinesWithTwoLetters(board: List<Char>, value: Char): Int {
         // Count the number of lines with 2 X's and a blank
         return GameRules.winningLines.count { line ->
@@ -58,6 +63,8 @@ class AI(private val aiPlayer:Char) {
         // Check if X has won
         for (line in GameRules.winningLines) {
             val (a, b, c) = line
+
+
             if (board[a] == value && board[b] == value && board[c] == value) {
                 return true
             }
@@ -65,9 +72,8 @@ class AI(private val aiPlayer:Char) {
         return false
     }
 
-
-    private fun opponent():Char{
-        return if (aiPlayer=='X') '0' else 'X'
+    private fun opponent(): Char {
+        return if (aiPlayer == 'X') 'O' else 'X'
     }
 }
 

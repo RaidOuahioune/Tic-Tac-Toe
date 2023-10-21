@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.mutableStateOf
 import com.example.x_o.game.logic.AI
 import com.example.x_o.game.logic.GameRules
+import com.example.x_o.game.network.HttpClient
 import kotlin.random.Random
 
 
@@ -17,7 +18,7 @@ class TicTacToeViewModel(public val isSinglePlayer:Boolean=true) : ViewModel() {
     init {
         //TODO:CHange this latter to be more dynamic
         currentPlayer='X'
-        ai=AI('0')
+        ai=AI('O')
     }
     private val _board = mutableStateOf<List<Char>>(List(9) { ' ' })
     val board: MutableState<List<Char>> = _board
@@ -35,6 +36,7 @@ class TicTacToeViewModel(public val isSinglePlayer:Boolean=true) : ViewModel() {
                 aiMove()
             }
         }
+
     }
 
     fun aiMove(){

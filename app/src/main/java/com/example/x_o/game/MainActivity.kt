@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import android.os.Bundle
 import android.os.Vibrator
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen

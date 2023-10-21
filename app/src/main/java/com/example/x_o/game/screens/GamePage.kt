@@ -1,3 +1,6 @@
+package com.example.x_o.game.screens
+
+import TicTacToeViewModel
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -19,11 +22,10 @@ import com.example.x_o.game.composables.GameBoard
 import com.example.x_o.game.composables.GameDialog
 
 
-
-class GamePage(public val vibrator: Vibrator) {
+class GamePage(public val vibrator: Vibrator, private val viewModel: TicTacToeViewModel) {
     @RequiresApi(Build.VERSION_CODES.R)
     @Composable
-    fun get(viewModel: TicTacToeViewModel ) {
+    operator fun invoke() {
         val board = viewModel.board
 
         Column(
@@ -33,10 +35,10 @@ class GamePage(public val vibrator: Vibrator) {
         ) {
 
             if (!viewModel.gameInProgress) {
-                vibrator.vibrate( VibrationEffect.createOneShot (100, VibrationEffect.EFFECT_TICK))
-                GameDialog(vibrator=vibrator).get(viewModel)
+                vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.EFFECT_TICK))
+                GameDialog(vibrator = vibrator, viewModel)()
             }
-            GameBoard(vibrator).get(board.value!!, viewModel::onCellClick)
+            GameBoard(vibrator, board.value!!, viewModel::onCellClick)()
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 colors = ButtonDefaults.buttonColors(
