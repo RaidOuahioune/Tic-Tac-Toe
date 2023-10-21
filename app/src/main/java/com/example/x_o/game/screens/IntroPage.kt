@@ -45,7 +45,7 @@ class IntroPage(private val navController: NavController) {
 
                 ) {
                     GameModeButton(
-                        text = "Play with AI", selected = selectedOption == GameOption.AI
+                        text = "Play Against The Computer", selected = selectedOption == GameOption.AI
                     ) {
                         selectedOption = GameOption.AI
                     }()
@@ -55,7 +55,7 @@ class IntroPage(private val navController: NavController) {
                         selectedOption = GameOption.MULTIPLAYER
                     }()
                     GameModeButton(
-                        text = "Remote multiplayer", selected = selectedOption == GameOption.REMOTE
+                        text = "Remote Multiplayer", selected = selectedOption == GameOption.REMOTE
                     ) {
                         selectedOption = GameOption.REMOTE
                     }()
