@@ -45,17 +45,17 @@ class IntroPage(private val navController: NavController) {
 
                 ) {
                     GameModeButton(
-                        text = "Play Against The Computer", selected = selectedOption == GameOption.AI
+                        text = "Play VS AI", selected = selectedOption == GameOption.AI
                     ) {
                         selectedOption = GameOption.AI
                     }()
                     GameModeButton(
-                        text = "Multiplayer", selected = selectedOption == GameOption.MULTIPLAYER
+                        text = "VS HUMAN", selected = selectedOption == GameOption.MULTIPLAYER
                     ) {
                         selectedOption = GameOption.MULTIPLAYER
                     }()
                     GameModeButton(
-                        text = "Remote Multiplayer", selected = selectedOption == GameOption.REMOTE
+                        text = "VS REMOTE HUMAN", selected = selectedOption == GameOption.REMOTE
                     ) {
                         selectedOption = GameOption.REMOTE
                     }()
